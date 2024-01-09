@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">sum</button>
+    <button id="btn2">sum 2</button>
+    <script>
+      let worker = new Worker("js/worker.js");
+      let worker2 = new Worker("js/worker2.js");
+      let button = document.getElementById("btn");
+      let button2 = document.getElementById("btn2");
+
+      button2.onclick = function () {
+        worker2.postMessage("");
+      };
+
+      worker2.onmessage = function (message) {
+        alert(`from sum2:${message.data}`);
+      };
+
+      button.onclick = function () {
+        worker.postMessage("");
+      };
+
+      worker.onmessage = function (msg) {
+        alert(`from sum: ${msg.data}`);
+      };
+    </script>
+  </body>
+</html>

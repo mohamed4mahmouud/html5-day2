@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">Get Location</button>
+    <button id="cls-btn">Clear Location</button>
+    <script>
+      let btn = document.getElementById("btn");
+      let clearButton = document.getElementById("cls-btn");
+
+      clearButton.addEventListener("click", clearLocation);
+      btn.addEventListener("click", getLocation);
+      let id;
+      function getLocation() {
+        navigator.geolocation.watchPosition(showPosition);
+      }
+
+      function showPosition(pos) {
+        let coords = pos.coords;
+        let lat = coords.latitude;
+        let long = coords.longitude;
+        let win = window.open(
+          `http://maps.google.com/maps?q=${lat},${long}`,
+          "",
+          "width=400,height=400"
+        );
+        win.focus();
+      }
+
+      function clearLocation() {
+        id = navigator.geolocation.watchPosition(showPosition);
+        navigator.geolocation.clearWatch(id);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Users</title>
+  </head>
+  <body>
+    <div class="container">
+      <button class="btn">delete all users</button>
+      <div class="row-data"></div>
+    </div>
+    <script>
+      let users = JSON.parse(localStorage.getItem("users"));
+      let btn = document.querySelector(".btn");
+
+      btn.addEventListener("click", () => {
+        localStorage.removeItem("users");
+        users = [];
+        displayUsers();
+      });
+
+      function displayUsers() {
+        let allUsers = ``;
+        for (let i = 0; i < users.length; i++) {
+          allUsers += `<p>username : ${users[i].username}</p>
+                  <p>age:${users[i].age}</p>
+                  <button onclick="deleteUser(${i})">delete user</button>`;
+        }
+        document.querySelector(".row-data").innerHTML = allUsers;
+      }
+
+      function deleteUser(index) {
+        if (index >= 0 && index < users.length) {
+          users.splice(index, 1);
+          localStorage.setItem("users", JSON.stringify(users));
+          displayUsers();
+        }
+      }
+
+      displayUsers();
+    </script>
+  </body>
+</html>

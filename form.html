@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form</title>
+  </head>
+  <body>
+    <form id="userForm" action="userData.html">
+      <label for="user-name">Username:</label>
+      <input
+        type="text"
+        id="user-name"
+        placeholder="Enter your username"
+        pattern="[a-zA-Z]+"
+        required
+      />
+
+      <label for="age">Age:</label>
+      <input
+        type="number"
+        id="age"
+        placeholder="Enter your age"
+        min="0"
+        required
+      />
+
+      <input type="submit" value="Submit" />
+    </form>
+
+    <script>
+      let userName = document.getElementById("user-name");
+      let userAge = document.getElementById("age");
+      let submitButton = document.getElementById("btn");
+
+      submitButton.addEventListener("click", saveUsers);
+      let users = [];
+      if (localStorage.getItem("users") != null) {
+        users = JSON.parse(localStorage.getItem("users"));
+      }
+
+      function saveUsers() {
+        const usersData = {
+          username: userName.value,
+          age: userAge.value,
+        };
+        users.push(usersData);
+        localStorage.setItem("users", JSON.stringify(users));
+        clearForm();
+        //location.assign("../userData.html");
+      }
+
+      function clearForm() {
+        userName.value = "";
+        userAge.value = "";
+      }
+    </script>
+  </body>
+</html>
