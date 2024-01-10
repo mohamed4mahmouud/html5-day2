@@ -1,0 +1,27 @@
+input[type="email"]:valid,
+input[type="text"]:valid,
+input[type="email"]:focus,
+input[type="text"]:focus,
+input[type="email"]:invalid,
+input[type="text"]:invalid {
+  padding: 10px;
+  border: 2px solid;
+  width: 300px;
+  outline: none;
+  margin-top: 15px;
+}
+
+input[type="text"]:invalid,
+input[type="email"]:invalid {
+  border: 2px solid red;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+  border: 2px solid blue;
+}
+
+input[type="email"]:valid,
+input[type="text"]:valid {
+  border: 2px solid green;
+}

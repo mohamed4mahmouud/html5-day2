@@ -15,7 +15,7 @@
       let btn = document.querySelector(".btn");
 
       btn.addEventListener("click", () => {
-        localStorage.removeItem("users");
+        localStorage.removeItem("Users");
         users = [];
         displayUsers();
       });
@@ -24,7 +24,7 @@
         let allUsers = ``;
         for (let i = 0; i < users.length; i++) {
           allUsers += `<p>username : ${users[i].username}</p>
-                  <p>age:${users[i].age}</p>
+                  <p>email:${users[i].email}</p>
                   <button onclick="deleteUser(${i})">delete user</button>`;
         }
         document.querySelector(".row-data").innerHTML = allUsers;
@@ -33,7 +33,7 @@
       function deleteUser(index) {
         if (index >= 0 && index < users.length) {
           users.splice(index, 1);
-          localStorage.setItem("users", JSON.stringify(users));
+          localStorage.setItem("Users", JSON.stringify(users));
           displayUsers();
         }
       }

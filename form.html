@@ -3,10 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Form</title>
   </head>
   <body>
-    <form id="userForm" action="userData.html">
+    <form id="userForm" action="./userData.html" onsubmit="saveUsers()">
       <label for="user-name">Username:</label>
       <input
         type="text"
@@ -16,43 +17,37 @@
         required
       />
 
-      <label for="age">Age:</label>
-      <input
-        type="number"
-        id="age"
-        placeholder="Enter your age"
-        min="0"
-        required
-      />
+      <label for="email">email:</label>
+      <input type="email" id="email" placeholder="Enter your email" required />
 
-      <input type="submit" value="Submit" />
+      <input type="submit" value="submit" />
     </form>
 
     <script>
       let userName = document.getElementById("user-name");
-      let userAge = document.getElementById("age");
-      let submitButton = document.getElementById("btn");
+      let userEmail = document.getElementById("email");
+      //let submitButton = document.getElementById("btn");
 
-      submitButton.addEventListener("click", saveUsers);
+      // submitButton.addEventListener("click", saveUsers);
       let users = [];
-      if (localStorage.getItem("users") != null) {
-        users = JSON.parse(localStorage.getItem("users"));
+      if (localStorage.getItem("Users") != null) {
+        users = JSON.parse(localStorage.getItem("Users"));
       }
 
       function saveUsers() {
         const usersData = {
           username: userName.value,
-          age: userAge.value,
+          email: userEmail.value,
         };
         users.push(usersData);
-        localStorage.setItem("users", JSON.stringify(users));
+        localStorage.setItem("Users", JSON.stringify(users));
         clearForm();
         //location.assign("../userData.html");
       }
 
       function clearForm() {
         userName.value = "";
-        userAge.value = "";
+        userEmail.value = "";
       }
     </script>
   </body>
